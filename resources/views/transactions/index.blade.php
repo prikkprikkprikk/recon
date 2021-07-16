@@ -54,3 +54,36 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+
+const highlightBg = 'bg-blue-100'
+let selectedRow = document.querySelector('tbody tr')
+selectedRow.classList.add( highlightBg )
+
+document.addEventListener('keydown', function($ev) {
+    if($ev.key=='ArrowUp') {
+        $ev.preventDefault()
+        console.log('up')
+    }
+    if($ev.key=='ArrowDown') {
+        $ev.preventDefault()
+        console.log('down')
+    }
+    if($ev.key=='ArrowLeft') {
+        $ev.preventDefault()
+        selectedRow.classList.remove( highlightBg )
+        selectedRow = selectedRow.previousElementSibling || selectedRow
+        selectedRow.classList.add( highlightBg )
+        console.log("selected row has ID: ", selectedRow.getAttribute('transactionid'))
+    }
+    if($ev.key=='ArrowRight') {
+        $ev.preventDefault()
+        selectedRow.classList.remove( highlightBg )
+        selectedRow = selectedRow.nextElementSibling || selectedRow
+        selectedRow.classList.add( highlightBg )
+        console.log("selected row has ID: ", selectedRow.getAttribute('transactionid'))
+    }
+})
+
+</script>
