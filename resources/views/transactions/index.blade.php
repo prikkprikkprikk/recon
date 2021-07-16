@@ -21,31 +21,33 @@
                                 <td class="p-2">Motkonto</td> --}}
                             </tr>
                         </thead>
-                    @foreach ($transactions as $transaction)
-                    <tr transactionid="{{ $transaction->id }}">
-                        <td class="p-2 border-b">
-                            {{ $transaction->posted_date }}
-                        </td>
-                        <td class="p-2 border-b">
-                            {{ $transaction->interest_date }}
-                        </td>
-                        <td class="p-2 border-b">
-                            {{ $transaction->text_code }}
-                        </td>
-                        <td class="p-2 border-b">
-                            {{ $transaction->description }}
-                        </td>
-                        <td class="p-2 border-b text-right whitespace-nowrap">
-                            {!! number_format(($transaction->amount/100), 2, ',', '&thinsp;') !!}
-                        </td>
-                        {{-- <td class="p-2 border-b">
-                            {{ $transaction->archival_reference }}
-                        </td>
-                        <td class="p-2 border-b">
-                            {{ $transaction->contra_account }}
-                        </td> --}}
-                    </tr>
-                    @endforeach
+                        <tbody>
+                            @foreach ($transactions as $transaction)
+                            <tr transactionid="{{ $transaction->id }}">
+                                <td class="p-2 border-b">
+                                    {{ $transaction->posted_date }}
+                                </td>
+                                <td class="p-2 border-b">
+                                    {{ $transaction->interest_date }}
+                                </td>
+                                <td class="p-2 border-b">
+                                    {{ $transaction->text_code }}
+                                </td>
+                                <td class="p-2 border-b">
+                                    {{ $transaction->description }}
+                                </td>
+                                <td class="p-2 border-b text-right whitespace-nowrap">
+                                    {!! number_format(($transaction->amount/100), 2, ',', '&thinsp;') !!}
+                                </td>
+                                {{-- <td class="p-2 border-b">
+                                    {{ $transaction->archival_reference }}
+                                </td>
+                                <td class="p-2 border-b">
+                                    {{ $transaction->contra_account }}
+                                </td> --}}
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
