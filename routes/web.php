@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShowTransactions;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/transactions', function() {
-    return view( 'transactions.index', [
-        'transactions' => Transaction::orderBy('sort_order','desc')->get(),
-    ] );
-})->middleware(['auth'])->name('transactions');
+Route::get('/transactions', ShowTransactions::class)->middleware(['auth'])->name('transactions');
 
 require __DIR__.'/auth.php';
