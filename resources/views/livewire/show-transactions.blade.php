@@ -10,11 +10,11 @@
                 <table>
                     <thead class="font-bold border-b">
                         <tr>
-                            <td class="p-2">Bokført</td>
-                            <td class="p-2">Rentedato</td>
-                            <td class="p-2">Tekstkode</td>
-                            <td class="p-2">Beskrivelse</td>
-                            <td class="p-2 text-right">Beløp</td>
+                            <th class="p-2">Bokført</th>
+                            <th class="p-2">Rentedato</th>
+                            <th class="p-2">Tekstkode</th>
+                            <th class="p-2">Beskrivelse</th>
+                            <th class="p-2 text-right">Beløp</th>
                             {{-- <td class="p-2">Arkivref</td>
                             <td class="p-2">Motkonto</td> --}}
                         </tr>
