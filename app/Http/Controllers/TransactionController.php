@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Storage;
 class TransactionController extends Controller
 {
 
-    public function import()
+    public function import(string $path)
     {
-        Excel::import( new TransactionsImport, Storage::path('transactionExport.xls') );
+        Excel::import( new TransactionsImport, Storage::path($path) );
     }
 
 }
