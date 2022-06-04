@@ -5,6 +5,7 @@ namespace App\Imports;
 use DateTime;
 use App\Models\Transaction;
 use Illuminate\Support\Collection;
+use App\DTO\IncomingTransactionData;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -17,7 +18,7 @@ class TransactionsImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $rows)
     {
-        $sort_order_max = Transaction::max('sort_order');
+        $sort_order_max = Transaction::max('sort_order') ?? 0;
 
         $rows = $rows->sort(function($row_a, $row_b){
             $a_posted_date = (DateTime::createFromFormat('d.m.Y', $row_a['bokfort']))->format('Y-m-d');
@@ -29,24 +30,12 @@ class TransactionsImport implements ToCollection, WithHeadingRow
 
         foreach ($rows as $row)
         {
-            $posted_date = DateTime::createFromFormat('d.m.Y', $row['bokfort']);
-            $interest_date = DateTime::createFromFormat('d.m.Y', $row['rentedato']);
-            $amount = ( $row['ut_av_konto'] ?? $row['inn_pa_konto'] ) * 100;
+            $incomingTransactionData = IncomingTransactionData::fromExcelRow($row);
 
-            $values = [
-                'posted_date' => $posted_date->format('Y-m-d'),
-                'interest_date' => $interest_date->format('Y-m-d'),
-                'text_code' => $row['tekstkode'],
-                'description' => $row['beskrivelse'],
-                'amount' => $amount,
-                'archival_reference' => $row['arkivref'],
-                'contra_account' => $row['motkonto'],
-                'sort_order' => ++$sort_order_max,
-            ];
-
-            Transaction::create($values);
+            Transaction::create($incomingTransactionData->toArray() + [
+                'sort_order' => $sort_order_max++,
+            ]);
         }
-
 
     }
 }
