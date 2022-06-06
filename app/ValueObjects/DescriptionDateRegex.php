@@ -14,30 +14,26 @@ class DescriptionDateRegex
         public string $description,
         public Carbon $posted_date,
     ) {
+        $this->date = $this->posted_date;
         $this->getDateFromDescription();
     }
 
     public function getDateFromDescription(): void
     {
-        $date = $this->posted_date;
-
-        $dateRegexes = [
+        $dateRegexes = collect([
             '/^(?<date>\d{2}\.\d{2}) /',         // Description starts with dd.mm
             '/^\*\d{4} (?<date>\d{2}\.\d{2}) /', // Description starts with ampersand and four last digits of card
-        ];
+        ]);
 
-        foreach ($dateRegexes as $dateRegex) {
-            if (preg_match($dateRegex, $this->description, $matches)) {
-                $date = Carbon::createFromFormat('d.m.Y', $matches['date'] . '.' . $date->format('Y'));
-                break;
+        $dateRegexes->each(function ($regex) {
+            if (preg_match($regex, $this->description, $matches)) {
+                $this->date = Carbon::createFromFormat('d.m.Y', $matches['date'] . '.' . $this->posted_date->year);
+                return false; // break out of each()
             }
-            $date = $this->posted_date;
-        }
+        });
 
-        if ($date->month > $this->posted_date->month) {
-            $date->subYear();
+        if ($this->date->month > $this->posted_date->month) {
+            $this->date->subYear();
         };
-
-        $this->date = $date;
     }
 }
