@@ -9,9 +9,13 @@ it('should return an IncomingTransactionData object with expected values', funct
     );
 
     expect($incomingTransactionData)->toBeInstanceOf(IncomingTransactionData::class);
-    expect($incomingTransactionData->date->format('d.m.Y'))->toBe($incomingData['bokfort']);
+    expect($incomingTransactionData->posted_date->format('d.m.Y'))->toBe($incomingData['bokfort']);
+    expect($incomingTransactionData->interest_date->format('d.m.Y'))->toBe($incomingData['rentedato']);
+    expect($incomingTransactionData->text_code)->toBe($incomingData['tekstkode']);
     expect($incomingTransactionData->description)->toBe($incomingData['beskrivelse']);
     expect($incomingTransactionData->amount)->toBe(($incomingData['ut_av_konto'] ?? $incomingData['inn_pa_konto']) * 100);
+    expect($incomingTransactionData->archival_reference)->toBe($incomingData['arkivref']);
+    expect($incomingTransactionData->contra_account)->toBe($incomingData['motkonto']);
 
 })->with(
     [
