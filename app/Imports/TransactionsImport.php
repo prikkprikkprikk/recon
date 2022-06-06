@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use DateTime;
+use Illuminate\Support\Carbon;
 use App\Models\Transaction;
 use Illuminate\Support\Collection;
 use App\DTO\IncomingTransactionData;
@@ -21,8 +21,8 @@ class TransactionsImport implements ToCollection, WithHeadingRow
         $sort_order_max = Transaction::max('sort_order') ?? 0;
 
         $rows = $rows->sort(function($row_a, $row_b){
-            $a_posted_date = (DateTime::createFromFormat('d.m.Y', $row_a['bokfort']))->format('Y-m-d');
-            $b_posted_date = (DateTime::createFromFormat('d.m.Y', $row_b['bokfort']))->format('Y-m-d');
+            $a_posted_date = (Carbon::createFromFormat('d.m.Y', $row_a['bokfort']))->format('Y-m-d');
+            $b_posted_date = (Carbon::createFromFormat('d.m.Y', $row_b['bokfort']))->format('Y-m-d');
 
             if($a_posted_date===$b_posted_date) { return 0; }
             return $a_posted_date < $b_posted_date ? -1 : 1;
