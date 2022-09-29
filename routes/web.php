@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Livewire\ShowTransactions;
-use App\Models\Transaction;
+use App\Http\Livewire\ShowTransformers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +24,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/transactions', ShowTransactions::class)->middleware(['auth'])->name('transactions');
+Route::get('/transformers', ShowTransformers::class)->middleware(['auth'])->name('transformers');
 
 require __DIR__.'/auth.php';
