@@ -15,7 +15,7 @@ it(
         ]);
 
         // Act
-        $test_setting = LoadUserSetting::execute($user, 'test_setting');
+        $test_setting = LoadUserSetting::execute('test_setting', $user);
 
         // Assert
         $this->assertIsString($test_setting);

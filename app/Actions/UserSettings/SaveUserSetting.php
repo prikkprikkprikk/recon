@@ -20,7 +20,7 @@ class SaveUserSetting
         }
     }
 
-    public static function execute(User $user = null, string $setting, string $value) : void
+    public static function execute(string $setting, string $value, User $user = null) : void
     {
         app(UserSettingsInterface::class)->save($user, $setting, $value);
     }

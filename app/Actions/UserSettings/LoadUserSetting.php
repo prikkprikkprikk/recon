@@ -9,7 +9,7 @@ use App\Interfaces\UserSettingsInterface;
 
 class LoadUserSetting
 {
-    public static function execute(User $user = null, string $setting) : ?string
+    public static function execute(string $setting, User $user = null) : ?string
     {
         $user = $user ?? auth()->user();
         $usc = app(UserSettingsInterface::class);

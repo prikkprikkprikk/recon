@@ -11,7 +11,7 @@ it(
         $user = User::factory()->create();
 
         // Act
-        SaveUserSetting::execute($user, 'test_setting', 'test_value');
+        SaveUserSetting::execute('test_setting', 'test_value', $user);
 
         // Assert
         $this->assertIsArray($user->settings);
