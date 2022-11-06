@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use GuzzleHttp\Client;
 use App\Services\YnabApi;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\UserSettingsInterface;
+use App\Http\Controllers\UserSettingsController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Model::preventSilentlyDiscardingAttributes($this->app->isLocal());
+
         $this->app->singleton(
             YnabApi::class,
             function ()
@@ -38,6 +43,13 @@ class AppServiceProvider extends ServiceProvider
                 ]);
 
                 return new YnabApi( $client );
+            }
+        );
+        $this->app->singleton(
+            UserSettingsInterface::class,
+            function ()
+            {
+                return new UserSettingsController();
             }
         );
     }
