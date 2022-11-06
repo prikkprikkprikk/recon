@@ -30,16 +30,8 @@
                 <div class="p-6 bg-white border-b border-gray-200 prose">
 
                     <h2>Budsjett</h2>
-                    <ul>
-                        @php
-                            $ynabApi = app(App\Services\YnabApi::class)
-                        @endphp
-                        @foreach ($ynabApi->budgets() as $budget)
-                            <li>
-                                {{ $budget->name }}
-                            </li>
-                        @endforeach
-                    </ul>
+
+                    @livewire('ynab.budget-chooser')
 
                 </div>
             </div>
