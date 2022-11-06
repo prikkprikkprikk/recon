@@ -8,7 +8,7 @@ it(
     {
         $ynabApi = app(YnabApi::class);
 
-        $budgets = $ynabApi->getBudgets();
+        $budgets = $ynabApi->budgets();
 
         expect($budgets->data->budgets)->toBeArray();
     }

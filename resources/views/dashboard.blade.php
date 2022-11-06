@@ -34,7 +34,7 @@
                         @php
                             $ynabApi = app(App\Services\YnabApi::class)
                         @endphp
-                        @foreach ($ynabApi->getBudgets() as $budget)
+                        @foreach ($ynabApi->budgets() as $budget)
                             <li>
                                 {{ $budget->name }}
                             </li>

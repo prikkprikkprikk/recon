@@ -14,11 +14,11 @@ class YnabApi
         $this->client = $client;
     }
 
-    public function getBudgets() : array
+    public function budgets() : array
     {
         $response = $this->client->get('budgets');
 
-        $budgets = json_decode($response->getBody())->data->budgets;
+        $budgets = json_decode($response->getBody()->getContents())->data->budgets;
 
         return $budgets;
     }
