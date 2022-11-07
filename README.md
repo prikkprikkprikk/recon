@@ -12,8 +12,8 @@ cd recon
 composer install
 npm install
 npm run build
-php artisan key:generate
 cp .env.example .env
+php artisan key:generate
 ```
 
 In the .env file:
