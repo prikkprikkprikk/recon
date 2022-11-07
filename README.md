@@ -25,7 +25,6 @@ Then, run migrations:
 
 ```
 php artisan migrate:fresh --seed
-
 ```
 
 ## Testing
